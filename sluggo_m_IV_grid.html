@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <title>Sluggo Pins, Mark IV, CSS Grid Edition</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Steffo Dimfelts Portfolio">
+    <meta name="keywords" content="HTML,CSS,jQuery,JavaScript,Bootstrap,Sluggo">
+    <meta name="author" content="Steffo Dimfelt">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <!-- Fonter -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Rozha+One|Montserrat" rel="stylesheet">
+    <!-- Portfolio CSS -->
+    <link rel="stylesheet" type="text/css" href="css/portfolio.css">
+  </head>
+  <body>
+
+<div id="sluggoPins_target"></div>
+
+<!-- Sluggo pins -->
+<div class="sluggo-source ">
+  <div class="img-thumbnail ">
+    <iframe  src="https://www.youtube.com/embed/pQB0uAFGqjA" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+    <h3>Header 1</h3>
+</div>
+
+<div class="sluggo-source  ">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/other/Elektro/2x2-Elektro01.jpg">
+  </div>
+    <h3>Header 2</h3>
+</div>
+
+<div class="sluggo-source  ">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/print/JW/whiskey/2x2-JW-Whiskey-04.jpg">
+  </div>
+    <h3>Header 3</h3>
+</div>
+
+<div class="sluggo-source  ">
+  <div class="img-thumbnail ">
+    <iframe src="https://player.vimeo.com/video/97273451"  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+    <h3>Header 4</h3>
+</div>
+
+<div class="sluggo-source ">
+  <div class="img-thumbnail ">
+    <img src="https://goo.gl/pJyv6s">
+  </div>
+    <h3>Header 5</h3>
+</div>
+
+<div class="sluggo-source ">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/print/JW/whiskey/2x2-JW-Whiskey-04.jpg">
+  </div>
+    <h3>Header 6</h3>
+</div>
+
+<div class="sluggo-source">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/foto/detaljer/2x1-Friskis-tyg.jpg">
+  </div>
+    <h3>Header 7</h3>
+</div>
+
+<div class="sluggo-source ">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/foto/detaljer/2x1-Swedbank-nyckelring.jpg">
+  </div>
+    <h3>Header 8</h3>
+</div>
+
+<div class="sluggo-source ">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/other/Elektro/2x2-Elektro01.jpg">
+  </div>
+    <h3>Header 9</h3>
+</div>
+
+<div class="sluggo-source">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/foto/detaljer/2x1-Friskis-tyg.jpg">
+  </div>
+    <h3>Header 10</h3>
+</div>
+
+<div class="sluggo-source">
+  <div class="img-thumbnail ">
+    <img class="img-fluid" src="https://goo.gl/pJyv6s"/>
+  </div>
+    <h3>Header 11</h3>
+</div>
+
+<div class="sluggo-source">
+  <div class="img-thumbnail ">
+    <img src="http://steffo.info/oldwebb/img/other/Elektro/2x2-Elektro01.jpg">
+  </div>
+    <p>Webb</p>
+    <h3>Header 12</h3>
+</div>
+
+<!-- END: Sluggo pins source-->
+
+<script>
+$(function(){
+/*
+	Name: Sluggo Pins, Mark IV, CSS Grid Edition
+	Version: 4.1
+	Developer: Steffo Dimfelt, 2016-2018
+	Mail: steffo.dimfelt@gmail.com
+	Web: http://sluggowebdev.blogspot.se/
+	Sluggo Pins, Mark IV, CSS Grid Edition uses jQuery
+*/
+
+function sluggoPinsGrid(target, source, columns, breaks, gap)
+{
+  //INITIALIZE variables
+  var mediaQueryOut="";fractions="";pinsOut="";innerClass=1;
+  var columnsOut=$(columns).last()[0];//DYNAMISK tar den sista i array columns
+
+  //RESET html and hide source while setup is done
+  $(target).html("");
+
+  if (breaks[0]!=0){breaks.unshift(0);}//Adds 0 to beginning of array if there isn't any.
+
+  //APPEND Columns
+  for(sluggoColIndx=1;sluggoColIndx<=columnsOut;sluggoColIndx++)
+  {pinsOut+='<div id="sluggoColumnID-'+sluggoColIndx+'" class="sluggo-column"><div class="sluggo-columns-inner-'+sluggoColIndx+'"></div> </div>';}
+  $(pinsOut).appendTo(target);
+
+  //APPEND Pins to Columns
+  $( source).appendTo( target+" .sluggo-columns-inner-1" );
+  for (columnsIndx=1;columnsIndx<columnsOut;columnsIndx++)
+    {
+      var columnsIndxNext=columnsIndx+1;
+      $( target+" .sluggo-columns-inner-"+columnsIndx+" "+source).clone().appendTo( target+" .sluggo-columns-inner-"+columnsIndxNext+"" );
+    }
+
+  //SETUP Columns CSS
+    //General CSS
+    mediaQueryOut+="/*Take a BIG chunk of Sluggo Queryloaf*/";
+    mediaQueryOut+=target+"{display:grid;width:100%;grid-template-rows:auto;grid-column-gap:"+gap+";grid-row-gap:"+gap+";}";
+    mediaQueryOut+=".sluggo-source-iframe{position: relative;height: 0;overflow:hidden;}";
+    mediaQueryOut+=source+" img {width: 100%;vertical-align:bottom;}";
+
+    //Sluggo Pins CSS
+    for (columnsCSSIndx=1;columnsCSSIndx<=columnsOut;columnsCSSIndx++)
+      {mediaQueryOut+=target+" #sluggoColumnID-"+columnsCSSIndx+" .sluggo-columns-inner-"+columnsCSSIndx+"{display: grid;grid-row-gap: "+gap+";}";}
+
+    //Sluggo Pins MediaQuery
+    var lastColumnVal = columns[columns.length-1];
+    for (breakIndx=0;breakIndx<breaks.length;breakIndx++)
+    {
+        
+        mediaQueryOut+='@media screen and (min-width:'+breaks[breakIndx]+'px) {';
+        mediaQueryOut+=target+' { min-height: 0; ; min-width: 0;grid-template-columns: repeat('+columns[breakIndx]+', 1fr );}';
+          for (columnIDIndx=lastColumnVal;columnIDIndx>=1;columnIDIndx--)
+          {
+            columnIDIndx<=columns[breakIndx]?mediaQueryOut+=target+" #sluggoColumnID-"+columnIDIndx+"{display:block;}":mediaQueryOut+=target+" #sluggoColumnID-"+columnIDIndx+"{display:none;}";
+            mediaQueryOut+=target+" #sluggoColumnID-"+columnIDIndx+" .sluggo-columns-inner-"+columnIDIndx+" "+source+":nth-child(1n) {display:none;}";
+            mediaQueryOut+=target+" #sluggoColumnID-"+columnIDIndx+" .sluggo-columns-inner-"+columnIDIndx+" "+source+":nth-child("+columns[breakIndx]+"n+"+columnIDIndx+") {display:block; overflow: hidden; min-width: 0;}";
+          }
+      mediaQueryOut+='}';//END Sluggo Pins MediaQuery
+    }
+  document.querySelector('style').textContent += mediaQueryOut;	//SEND MediaQuery
+}
+
+function sluggoPinsInput(target,source,columns,breaks,gap)
+{
+  //ADD a new stylesheet if there isn't any.
+  var findStyle = $("html").find("style");
+  findStyle.length==0&& $('head').append('<style></style>');
+
+  $(window).on('resize', function () {
+      $(window).on('load', function () {
+        sluggoPinsGrid(target,source,columns,breaks,gap);
+      });
+  });
+
+  $(window).on('load', function () {sluggoPinsGrid(target,source,columns,breaks,gap);});
+}
+      sluggoPinsInput("#sluggoPins_target",".sluggo-source", [1,2,3,4,6], [0,400,600,800,1000], "1rem");
+      //#1 OUTPUT Tag
+      //#2 INPUT Tag
+      //#3 Columns, Array (Same amount of elements as #4)
+      //#4 Breakpoints, window width in pixels, Ascending, Array (Same amount of elements as #3). ALWAYS begin with 0.
+      //#5 Space between Pins. Can be set as number or string (example 8, "8px", "2rem"). Only number = space in pixels.
+
+      });
+    </script>
+
+  </body>
+</html>
